@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
-const handleResponse = (
+export const handleResponse = (
   message: string,
   data: any = null,
   status: number = 200
@@ -13,7 +13,7 @@ const handleResponse = (
   return new NextResponse(JSON.stringify({ message, data }), { status });
 };
 
-const handleError = (error: unknown, message: string) => {
+export const handleError = (error: unknown, message: string) => {
   let errorMessage = "Unknown error occurred";
   if (error instanceof Error) {
     errorMessage = error.message;
@@ -22,7 +22,7 @@ const handleError = (error: unknown, message: string) => {
   return handleResponse(message, { error: errorMessage }, 500);
 };
 
-const ensureDbConnection = async () => {
+export const ensureDbConnection = async () => {
   try {
     await connect();
     console.log("Database connected");
